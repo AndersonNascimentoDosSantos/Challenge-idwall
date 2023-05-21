@@ -26,6 +26,7 @@ public class Crimes {
     this.id = id;
     this.crime = crime;
     this.description = description;
+    
   }
 
   public Long getId() {
@@ -51,5 +52,6 @@ public class Crimes {
   public void setDescription(String description) {
     this.description = description;
   }
+  
 
 }

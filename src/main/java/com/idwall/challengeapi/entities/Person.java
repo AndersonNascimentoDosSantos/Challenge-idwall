@@ -24,11 +24,15 @@ public class Person {
     private int ageMin;
     private int ageMax;
 
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Agency agency;
+
 
     public Person() {
     }
 
-    public Person(Long id, String name, String nacionalities, Byte[] img, LocalDate birthDate, char sex, int heightMin, int heightMax, int ageMin, int ageMax) {
+    public Person(Long id, String name, String nacionalities, Byte[] img, LocalDate birthDate, char sex, int heightMin, int heightMax, int ageMin, int ageMax, Agency agency) {
 
         this.id = id;
         this.name = name;
@@ -40,6 +44,7 @@ public class Person {
         this.heightMax = heightMax;
         this.ageMin = ageMin;
         this.ageMax = ageMax;
+        this.agency = agency;
     }
 
     public Long getId() {
@@ -120,5 +125,13 @@ public class Person {
 
     public void setAgeMax(int ageMax) {
         this.ageMax = ageMax;
+    }
+
+    public Agency getAgency() {
+        return agency;
+      }
+    
+    public void setAgency(Agency agency) {
+    this.agency = agency;
     }
 }
