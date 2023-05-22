@@ -1,5 +1,6 @@
 package com.idwall.challengeapi.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,15 +16,11 @@ public class Agency {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id_agency")
   private Long id;
   private String name;
 
   public Agency() {
-  }
-
-  public Crimes(Long id, String name) {
-    this.id = id;
-    this.crime = name;
   }
 
   public Long getId() {
