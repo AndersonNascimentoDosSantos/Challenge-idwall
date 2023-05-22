@@ -25,14 +25,14 @@ public class Person {
     private int ageMax;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id_agency")
     private Agency agency;
-
 
     public Person() {
     }
 
-    public Person(Long id, String name, String nacionalities, Byte[] img, LocalDate birthDate, char sex, int heightMin, int heightMax, int ageMin, int ageMax, Agency agency) {
+    public Person(Long id, String name, String nacionalities, Byte[] img, LocalDate birthDate, char sex, int heightMin,
+            int heightMax, int ageMin, int ageMax, Agency agency) {
 
         this.id = id;
         this.name = name;
@@ -129,9 +129,9 @@ public class Person {
 
     public Agency getAgency() {
         return agency;
-      }
-    
+    }
+
     public void setAgency(Agency agency) {
-    this.agency = agency;
+        this.agency = agency;
     }
 }
