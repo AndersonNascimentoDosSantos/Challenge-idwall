@@ -28,6 +28,10 @@ public class Person {
     @JoinColumn(name = "id_agency")
     private Agency agency;
 
+    @ManyToOne
+    @JoinColumn(name = "id_crime")
+    private Crimes crimes;
+
     public Person() {
     }
 
@@ -134,4 +138,13 @@ public class Person {
     public void setAgency(Agency agency) {
         this.agency = agency;
     }
+
+	public Crimes getCrimes() {
+		return crimes;
+	}
+
+	public void setCrimes(Crimes crimes) {
+		this.crimes = crimes;
+	}
+
 }
