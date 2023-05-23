@@ -119,8 +119,8 @@ public class PersonDTO {
     this.agency = agency;
   }
 
-  public String getCrimes() {
-    return crimes.getCrime();
+  public Crimes getCrimes() {
+    return crimes;
   }
 
   public void setCrimes(Crimes crimes) {
