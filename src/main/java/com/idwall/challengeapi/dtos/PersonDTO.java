@@ -7,7 +7,6 @@ import org.springframework.beans.BeanUtils;
 import com.idwall.challengeapi.entities.Agency;
 import com.idwall.challengeapi.entities.Crimes;
 import com.idwall.challengeapi.entities.Person;
-import com.idwall.challengeapi.entities.PersonCrime;
 
 public class PersonDTO {
   private Long id;
@@ -21,6 +20,7 @@ public class PersonDTO {
   private int ageMin;
   private int ageMax;
   private Agency agency;
+  private Crimes crimes;
 
   public PersonDTO() {
   }
@@ -111,12 +111,20 @@ public class PersonDTO {
     this.ageMax = ageMax;
   }
 
-  public Agency getAgency() {
-    return agency;
+  public String getAgency() {
+    return agency.getName();
   }
 
   public void setAgency(Agency agency) {
     this.agency = agency;
+  }
+
+  public String getCrimes() {
+    return crimes.getCrime();
+  }
+
+  public void setCrimes(Crimes crimes) {
+    this.crimes = crimes;
   }
 
 }
