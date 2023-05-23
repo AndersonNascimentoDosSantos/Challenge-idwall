@@ -1,5 +1,6 @@
 package com.idwall.challengeapi.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,11 +11,12 @@ import jakarta.persistence.Table;
  * Crimes
  */
 @Entity
-@Table(name = "T_CRIMES")
+@Table(name = "T_CRIME")
 public class Crimes {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id_crime")
   private Long id;
   private String crime;
   private String description;
