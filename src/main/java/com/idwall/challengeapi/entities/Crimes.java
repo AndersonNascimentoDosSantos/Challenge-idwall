@@ -10,13 +10,13 @@ import jakarta.persistence.Table;
 /**
  * Crimes
  */
-@Entity
-@Table(name = "T_CRIME")
+//@Entity
+//@Table(name = "T_CRIME")
 public class Crimes {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id_crime")
+//  @Id
+//  @GeneratedValue(strategy = GenerationType.IDENTITY)
+//  @Column(name = "id_crime")
   private Long id;
   private String crime;
   private String description;
