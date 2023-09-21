@@ -10,13 +10,13 @@ import jakarta.persistence.Table;
 /**
  * Agency
  */
-@Entity
-@Table(name = "T_Agency")
+//@Entity
+//@Table(name = "T_Agency")
 public class Agency {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id_agency")
+//  @Id
+//  @GeneratedValue(strategy = GenerationType.IDENTITY)
+//  @Column(name = "id_agency")
   private Long id;
   private String name;
 
