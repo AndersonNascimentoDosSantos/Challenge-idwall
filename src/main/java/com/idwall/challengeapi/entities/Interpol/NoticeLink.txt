@@ -1,0 +1,17 @@
+package com.idwall.challengeapi.entities.Interpol;
+
+import org.springframework.stereotype.Component;
+
+/**
+ * NoticeLink
+ */
+@Component
+public class NoticeLink {
+
+    private Link thumbnail;
+
+    public Link getThumbnail() {
+        return thumbnail;
+    }
+
+}

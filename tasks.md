@@ -5,10 +5,12 @@
 - [X] deserialização da api do fbi 
 - [X] configurar persistencia no h2 database
 - [X] mapear entidades para o banco
-- [ ] persistir dados do fbi no banco
-- [ ] testar api da interpol
-- [ ] deserialização da api do interpol
-- [ ] persistir dados da no banco
+- [x] persistir dados do fbi no banco
+- [x] testar api da interpol
+- [x] deserialização da api do interpol
+- [] persistir dados da no banco
+- [] implementar logica de pesquisar no banco antes de consultar as apis
+- [] tratar exceções
 
 ### Refatoração
 - [ ] subistituir os DTOS por records

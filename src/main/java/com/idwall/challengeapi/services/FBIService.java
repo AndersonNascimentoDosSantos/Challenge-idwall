@@ -8,7 +8,6 @@ import java.net.URL;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.idwall.challengeapi.entities.FBI.FBIResponse;
-import com.idwall.challengeapi.entities.FBI.Imagem;
 import com.idwall.challengeapi.entities.FBI.Item;
 import com.idwall.challengeapi.repositories.FBIRepository;
 import org.springframework.beans.factory.annotation.Autowired;
