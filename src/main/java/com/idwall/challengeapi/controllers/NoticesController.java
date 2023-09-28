@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.idwall.challengeapi.entities.Interpol.Notice;
 import com.idwall.challengeapi.services.InterpolService;
 
+import jakarta.transaction.Transactional;
+
 /**
  * NoticesController
  */
@@ -17,6 +19,7 @@ public class NoticesController {
     private InterpolService interpolService;
 
     @GetMapping("/interpol-data")
+    @Transactional
     public Notice getInterpolData(
             @RequestParam(name = "name", required = true) String name,
             @RequestParam(name = "forename", required = true) String forename) {
