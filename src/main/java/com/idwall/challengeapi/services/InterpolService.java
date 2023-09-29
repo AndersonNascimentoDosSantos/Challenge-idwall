@@ -3,8 +3,10 @@ package com.idwall.challengeapi.services;
 
 import com.idwall.challengeapi.entities.Interpol.InterpolResponse;
 import com.idwall.challengeapi.entities.Interpol.Notice;
+import com.idwall.challengeapi.repositories.InterpolRepository;
 import com.idwall.challengeapi.utils.GetConnection;
 import com.idwall.challengeapi.utils.GetResponseString;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.HttpURLConnection;
