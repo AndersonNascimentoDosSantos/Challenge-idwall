@@ -1,45 +1,32 @@
 package com.idwall.challengeapi.services;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-/**
- * InterpolService
- */
-import org.springframework.stereotype.Service;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.idwall.challengeapi.entities.Interpol.InterpolResponse;
 import com.idwall.challengeapi.entities.Interpol.Notice;
+import com.idwall.challengeapi.utils.GetConnection;
+import com.idwall.challengeapi.utils.GetResponseString;
+import org.springframework.stereotype.Service;
+
+import java.net.HttpURLConnection;
+import java.util.Map;
 
 @Service
 public class InterpolService {
-    private String apiUrl = "https://ws-public.interpol.int/notices/v1/red?";
-    private InterpolResponse interpolResponse;
 
-    public Notice getInterpolData(String name, String forename) {
+    private final GetResponseString<InterpolResponse> getResponseString;
+
+    public InterpolService(GetResponseString<InterpolResponse> getResponseString) {
+        this.getResponseString = getResponseString;
+    }
+
+    public Notice getInterpolData(Map<String, String> queryParams) {
         try {
-            String fullUrl = apiUrl + "&name=" + name + "&forename=" + forename;
-            URL url = new URL(fullUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
+            String apiUrl = "https://ws-public.interpol.int/notices/v1/red";
+            GetConnection getConnection = new GetConnection();
+            HttpURLConnection connection = getConnection.get(queryParams, apiUrl);
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {
-                BufferedReader inReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String inputLine;
 
-                while ((inputLine = inReader.readLine()) != null) {
-                    response.append(inputLine);
-                }
-
-                inReader.close();
-                Gson gson = new GsonBuilder().setLenient().create();
-                interpolResponse = gson.fromJson(response.toString(), InterpolResponse.class);
-
+                InterpolResponse interpolResponse = getResponseString.getString(connection, InterpolResponse.class);
                 if (interpolResponse != null && interpolResponse.getEmbedded().getNotices() != null) {
                     return interpolResponse.getEmbedded().getNotices().get(0);
                 }
