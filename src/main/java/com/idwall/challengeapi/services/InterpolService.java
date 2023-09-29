@@ -1,5 +1,6 @@
 package com.idwall.challengeapi.services;
 
+
 import com.idwall.challengeapi.entities.Interpol.InterpolResponse;
 import com.idwall.challengeapi.entities.Interpol.Notice;
 import com.idwall.challengeapi.utils.GetConnection;
@@ -9,8 +10,16 @@ import org.springframework.stereotype.Service;
 import java.net.HttpURLConnection;
 import java.util.Map;
 
+
 @Service
 public class InterpolService {
+    private String apiUrl = "https://ws-public.interpol.int/notices/v1/red?";
+    @Autowired
+    private InterpolRepository interpolRepository;
+    @Autowired
+    private InterpolResponse interpolResponse;
+    @Autowired Notice notice;
+
 
     private final GetResponseString<InterpolResponse> getResponseString;
 
@@ -28,6 +37,11 @@ public class InterpolService {
 
                 InterpolResponse interpolResponse = getResponseString.getString(connection, InterpolResponse.class);
                 if (interpolResponse != null && interpolResponse.getEmbedded().getNotices() != null) {
+
+                    String img = interpolResponse.getEmbedded().getNotices().get(0).get_links().getThumb().getHref();
+                    notice = interpolResponse.getEmbedded().getNotices().get(0);
+                    notice.setImage(img);
+                    interpolRepository.save(notice);
                     return interpolResponse.getEmbedded().getNotices().get(0);
                 }
             }
