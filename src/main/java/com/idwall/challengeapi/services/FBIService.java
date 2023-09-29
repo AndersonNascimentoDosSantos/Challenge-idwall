@@ -1,17 +1,16 @@
 package com.idwall.challengeapi.services;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.idwall.challengeapi.entities.FBI.FBIResponse;
 import com.idwall.challengeapi.entities.FBI.Item;
 import com.idwall.challengeapi.repositories.FBIRepository;
+import com.idwall.challengeapi.utils.GetConnection;
+import com.idwall.challengeapi.utils.GetResponseString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.net.HttpURLConnection;
+import java.util.Arrays;
+import java.util.Map;
 
 @Service
 public class FBIService {
@@ -19,41 +18,28 @@ public class FBIService {
     private FBIResponse fbiResponse;
     @Autowired
     FBIRepository fbiRepository;
-    
-    public Item[] BuscarFBI(String nome) {
+    private final GetResponseString<FBIResponse> getResponseString;
+
+       public FBIService(GetResponseString<FBIResponse> getResponseString) {
+        this.getResponseString = getResponseString;
+    }
+
+    public Item[] BuscarFBI(Map<String, String> queryParams) {
         try {
-            String apiUrl = "https://api.fbi.gov/@wanted?title=" + nome;
-
-            // criar uma conexao http
-            URL url = new URL(apiUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            // Configura a requisição http
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty("Accept", "application/json");
+            GetConnection getConnection = new GetConnection();
+            HttpURLConnection connection = getConnection.get(queryParams,"https://api.fbi.gov/@wanted");
 
             // codigo de resposta http
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {
-                BufferedReader inReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder response = new StringBuilder();
-                String inputLine;
 
-                while ((inputLine = inReader.readLine()) != null) {
-                    response.append(inputLine);
-                }
-
-                inReader.close();
-
-                Gson gson = new GsonBuilder().setLenient().create();
-                fbiResponse = gson.fromJson(response.toString(), fbiResponse.getClass());
+               this.fbiResponse = getResponseString.getString(connection, FBIResponse.class);
 
                 if (fbiResponse != null && fbiResponse.getItems() != null) {
                     fbiResponse.getItems();
-                    for (Item item : fbiResponse.getItems()) {
-                        fbiRepository.save(item);
-                    }
+                    fbiRepository.saveAll(Arrays.asList(fbiResponse.getItems()));
                 }
+                assert fbiResponse != null;
                 return fbiResponse.getItems();
             } else {
                 return null;
@@ -63,5 +49,7 @@ public class FBIService {
             return null;
         }
     }
+
+
 
 }

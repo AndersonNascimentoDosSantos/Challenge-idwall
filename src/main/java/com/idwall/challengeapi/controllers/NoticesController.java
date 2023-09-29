@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.idwall.challengeapi.entities.Interpol.Notice;
 import com.idwall.challengeapi.services.InterpolService;
 
+
+import java.util.Map;
+
 import jakarta.transaction.Transactional;
+
 
 /**
  * NoticesController
@@ -18,12 +22,12 @@ public class NoticesController {
     @Autowired
     private InterpolService interpolService;
 
-    @GetMapping("/interpol-data")
-    @Transactional
-    public Notice getInterpolData(
-            @RequestParam(name = "name", required = true) String name,
-            @RequestParam(name = "forename", required = true) String forename) {
-        return interpolService.getInterpolData(name, forename);
+
+    @GetMapping("/coletar-dados-interpol")
+  @Transactional
+    public Notice getInterpolData(@RequestParam Map<String, String> queryParams) {
+        return interpolService.getInterpolData(queryParams);
+
     }
 
 }
