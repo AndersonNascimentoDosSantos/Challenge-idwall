@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.net.HttpURLConnection;
+import java.util.List;
 import java.util.Map;
 
 
@@ -52,4 +53,8 @@ public class InterpolService {
         }
         return null;
     }
+
+	public List<Notice> buscarPorNome(String nome) {
+		return interpolRepository.buscarPorNome(nome);
+	}
 }
