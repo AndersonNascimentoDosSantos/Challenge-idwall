@@ -1,6 +1,8 @@
 package com.idwall.challengeapi.entities.Interpol;
 
 import java.util.List;
+
+import jakarta.persistence.Table;
 import org.springframework.stereotype.Component;
 import com.google.gson.annotations.SerializedName;
 import jakarta.persistence.Entity;
@@ -12,6 +14,7 @@ import jakarta.persistence.Transient;
  */
 @Component
 @Entity
+@Table(name = "T_NOTICE")
 public class Notice {
 
     @Id

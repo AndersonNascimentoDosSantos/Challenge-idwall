@@ -2,7 +2,6 @@ package com.idwall.challengeapi.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.idwall.challengeapi.config.ModelMapperConfig;
 import com.idwall.challengeapi.entities.FBI.Item;
 import com.idwall.challengeapi.entities.Interpol.Notice;
 import com.idwall.challengeapi.interfaces.FBIParameters;
@@ -10,21 +9,16 @@ import com.idwall.challengeapi.interfaces.InterpolParameters;
 import com.idwall.challengeapi.interfaces.QueryParameters;
 import com.idwall.challengeapi.services.FBIService;
 import com.idwall.challengeapi.services.InterpolService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.modelmapper.config.Configuration;
-
-import javax.print.attribute.standard.Destination;
 
 @RestController
 
