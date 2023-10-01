@@ -7,7 +7,7 @@ import java.util.StringJoiner;
 
 public class InterpolParameters {
     @SerializedName("nome")
-    private String name;
+    private String forename;
     @SerializedName("pais_origem")
     private String nationality;
     @SerializedName("sexo")
@@ -20,11 +20,11 @@ public class InterpolParameters {
     private String location;
 
     public String getName() {
-        return name;
+        return forename;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String forename) {
+        this.forename = forename;
     }
 
     public String getNationality() {
@@ -70,8 +70,8 @@ public class InterpolParameters {
 
     public String buildQueryString() {
         StringJoiner queryString = new StringJoiner("&");
-        if (name != null) {
-            queryString.add("name=" + name);
+        if (forename != null) {
+            queryString.add("forename=" + forename);
         }
         if (nationality != null) {
             queryString.add("nationality=" + nationality);
