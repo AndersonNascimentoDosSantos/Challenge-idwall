@@ -3,11 +3,14 @@ package com.idwall.challengeapi.interfaces;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
-public class QueryParameters {
+import java.util.StringJoiner;
+
+
+public class FBIParameters {
+
     @SerializedName("nome")
     private String title;
 
-    private String name;
     @SerializedName("classificacao_pessoa")
     private String person_classification;
     @SerializedName("classificacao_cartaz")
@@ -31,68 +34,6 @@ public class QueryParameters {
     private Integer page;
     @SerializedName("limit")
     private Integer pageSize;
-
-    @SerializedName("pais_origem")
-    private String nationality;
-    @SerializedName("sexo")
-    private String gender;
-    @SerializedName("nascimento")
-    private String birth_date;
-    @SerializedName("procurado_por")
-    private String wanted_for;
-    @SerializedName("localizacao")
-    private String location;
-    public QueryParameters() {
-        // Construtor padrão
-    }
-
-    public String getName() {
-        return title;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getBirth_date() {
-        return birth_date;
-    }
-
-    public void setBirth_date(String birth_date) {
-        this.birth_date = birth_date;
-    }
-
-    public String getWanted_for() {
-        return wanted_for;
-    }
-
-    public void setWanted_for(String wanted_for) {
-        this.wanted_for = wanted_for;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 
     public String getTitle() {
         return title;
@@ -181,9 +122,46 @@ public class QueryParameters {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
-
     public String toJson() {
         Gson gson = new Gson();
         return gson.toJson(this);
     }
+    public String buildQueryString(FBIParameters queryParams) {
+        StringJoiner queryString = new StringJoiner("&");
+        if (queryParams.getTitle() != null) {
+            queryString.add("title=" + queryParams.getTitle());
+        }
+        if (queryParams.getPerson_classification() != null) {
+            queryString.add("person_classification=" + queryParams.getPerson_classification());
+        }
+        if (queryParams.getPoster_classification() != null) {
+            queryString.add("poster_classification=" + queryParams.getPoster_classification());
+        }
+        if (queryParams.getAge_min() != null) {
+            queryString.add("age_min=" + queryParams.getAge_min());
+        }
+        if (queryParams.getAge_max() != null) {
+            queryString.add("age_max=" + queryParams.getAge_max());
+        }
+        if (queryParams.getField_offices() != null) {
+            queryString.add("field_offices=" + queryParams.getField_offices());
+        }
+        if (queryParams.getStatus() != null) {
+            queryString.add("status=" + queryParams.getStatus());
+        }
+        if (queryParams.getSort_on() != null) {
+            queryString.add("sort_on=" + queryParams.getSort_on());
+        }
+        if (queryParams.getSort_order() != null) {
+            queryString.add("sort_order=" + queryParams.getSort_order());
+        }
+        if (queryParams.getPage() != null) {
+            queryString.add("page=" + queryParams.getPage());
+        }
+        if (queryParams.getPageSize() != null) {
+            queryString.add("pageSize=" + queryParams.getPageSize());
+        }
+        return queryString.toString();
+    }
+
 }

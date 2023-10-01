@@ -1,20 +1,19 @@
 package com.idwall.challengeapi.utils;
 
+import com.idwall.challengeapi.interfaces.FBIParameters;
+import com.idwall.challengeapi.interfaces.InterpolParameters;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
-import java.util.StringJoiner;
+
 @Service
-public class GetConnection {
-    public  HttpURLConnection get(Map<String, String> queryParams,String baseUrl) throws IOException {
-        StringJoiner queryString = new StringJoiner("&");
-        for (Map.Entry<String, String> entry : queryParams.entrySet()) {
-            queryString.add(entry.getKey() + "=" + entry.getValue());
-        }
-        String apiUrl = baseUrl +"?"+ queryString;
+public class GetConnection<T> {
+    public HttpURLConnection get(T queryParams, String baseUrl) throws IOException {
+
+        String queryString = buildQueryString(queryParams);
+        String apiUrl = baseUrl + "?" + queryString;
 
         // criar uma conexao http
         URL url = new URL(apiUrl);
@@ -25,5 +24,17 @@ public class GetConnection {
         connection.setRequestProperty("Accept", "application/json");
 
         return connection;
+    }
+    private String buildQueryString(T queryParams) {
+        // Verifique se o objeto queryParams tem um método buildQueryString() definido
+        // e chame esse método para construir a string de consulta.
+        if (queryParams instanceof InterpolParameters) {
+            return ((InterpolParameters) queryParams).buildQueryString();
+        } else if (queryParams instanceof FBIParameters) {
+            return ((FBIParameters) queryParams).buildQueryString((FBIParameters) queryParams);
+        }
+
+        // Retorne uma string vazia ou lide com outros tipos de queryParams, se necessário.
+        return "";
     }
 }
