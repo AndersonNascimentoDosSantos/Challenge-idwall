@@ -3,6 +3,7 @@ package com.idwall.challengeapi.services;
 
 import com.idwall.challengeapi.entities.Interpol.InterpolResponse;
 import com.idwall.challengeapi.entities.Interpol.Notice;
+import com.idwall.challengeapi.interfaces.InterpolParameters;
 import com.idwall.challengeapi.repositories.InterpolRepository;
 import com.idwall.challengeapi.utils.GetConnection;
 import com.idwall.challengeapi.utils.GetResponseString;
@@ -30,10 +31,10 @@ public class InterpolService {
         this.getResponseString = getResponseString;
     }
 
-    public Notice getInterpolData(Map<String, String> queryParams) {
+    public Notice getInterpolData(InterpolParameters queryParams) {
         try {
             String apiUrl = "https://ws-public.interpol.int/notices/v1/red";
-            GetConnection getConnection = new GetConnection();
+            GetConnection<InterpolParameters> getConnection = new GetConnection<>();
             HttpURLConnection connection = getConnection.get(queryParams, apiUrl);
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {
