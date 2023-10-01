@@ -2,6 +2,7 @@ package com.idwall.challengeapi.services;
 
 import com.idwall.challengeapi.entities.FBI.FBIResponse;
 import com.idwall.challengeapi.entities.FBI.Item;
+import com.idwall.challengeapi.interfaces.FBIParameters;
 import com.idwall.challengeapi.repositories.FBIRepository;
 import com.idwall.challengeapi.utils.GetConnection;
 import com.idwall.challengeapi.utils.GetResponseString;
@@ -27,10 +28,10 @@ public class FBIService {
 		this.getResponseString = getResponseString;
 	}
 
-	public Item[] BuscarFBI(Map<String, String> queryParams) {
+	public Item[] BuscarFBI(FBIParameters fbiParameters) {
 		try {
-			GetConnection getConnection = new GetConnection();
-			HttpURLConnection connection = getConnection.get(queryParams, "https://api.fbi.gov/@wanted");
+			GetConnection<FBIParameters> getConnection = new GetConnection<>();
+			HttpURLConnection connection = getConnection.get(fbiParameters, "https://api.fbi.gov/@wanted");
 			connection.setRequestProperty("User-Agent", "idwall-api/1.0");
 
 			// codigo de resposta http
