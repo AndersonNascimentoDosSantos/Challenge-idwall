@@ -36,6 +36,7 @@ public class InterpolService {
             String apiUrl = "https://ws-public.interpol.int/notices/v1/red";
             GetConnection<InterpolParameters> getConnection = new GetConnection<>();
             HttpURLConnection connection = getConnection.get(queryParams, apiUrl);
+			connection.setRequestProperty("User-Agent", "idwall-api/1.0");
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {
 
@@ -52,7 +53,7 @@ public class InterpolService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new Notice();
     }
 
 	public List<Notice> buscarPorNome(String nome) {

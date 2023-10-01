@@ -14,7 +14,7 @@ import jakarta.persistence.Transient;
  */
 @Component
 @Entity
-@Table(name = "T_NOTICE")
+@Table
 public class Notice {
 
     @Id
