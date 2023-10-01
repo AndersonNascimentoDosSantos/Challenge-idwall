@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -19,4 +20,8 @@ public class WantedController {
         return fbiService.BuscarFBI(queryParams);
     }
 
+	@GetMapping("/fbi-wanted")
+	public List<Item> buscarPorNome(@RequestParam String title) {
+		return fbiService.BuscarPorNomeDB(title);
+	}
 }
