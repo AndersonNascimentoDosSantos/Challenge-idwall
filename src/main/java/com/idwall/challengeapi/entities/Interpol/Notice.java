@@ -1,11 +1,8 @@
 package com.idwall.challengeapi.entities.Interpol;
 
 import java.util.List;
-
 import org.springframework.stereotype.Component;
-
 import com.google.gson.annotations.SerializedName;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
